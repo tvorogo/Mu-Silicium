@@ -1,6 +1,5 @@
 name: Build UEFI for active devices
 on:
-  workflow_dispa
   push:
     branches: ["main"]
     paths:
