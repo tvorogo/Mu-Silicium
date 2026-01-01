@@ -1,5 +1,11 @@
 name: Build UEFI for active devices
 on:
+  workflow_dispatch:
+    inputs:
+      device:
+        description: 'device build'
+        required: true
+        type: string
   push:
     branches: ["main"]
     paths:
@@ -31,7 +37,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build UEFI for active devices
-        run: bash ./setup_env.sh -p apt && bash ./build_uefi.sh -d vayu -r DEBUG -c -i
+        run: bash ./setup_env.sh -p apt && bash ./build_uefi.sh -d ${{ device }} -r DEBUG -c -i
 
       - name: Upload UEFI images
         uses: actions/upload-artifact@v4
