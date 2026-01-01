@@ -12,11 +12,6 @@ on:
       - 'Silicon/**'
       - 'Silicium-ACPI'
   workflow_dispatch:
-  inputs:
-      download_url:
-        description: 'Download URL for UUP dump ZIP file'
-        required: true
-        type: string
   pull_request:
     types: [opened, reopened]
     paths:
@@ -37,7 +32,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build UEFI for active devices
       
-        run: $downloadUrl = "${{ github.event.inputs.download_url }}" && bash ./setup_env.sh -p apt && bash $downloadUrl -d nabu -r DEBUG -c -i
+        run: bash ./setup_env.sh -p apt && bash $downloadUrl -d nabu -r DEBUG -c -i
 
       - name: Upload UEFI images
         uses: actions/upload-artifact@v4
